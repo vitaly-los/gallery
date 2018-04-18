@@ -8,6 +8,7 @@
     <body>
     <div class="album py-5 bg-light">
         <div class="container">
+            <h1 class="h1 text-center">Image Gallery</h1>
             <div class="row">
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
