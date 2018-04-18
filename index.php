@@ -2,6 +2,8 @@
 <html>
     <head>
         <title><?php echo 'Image Gallery' ?></title>
+        <link rel="stylesheet" href="pub/css/bootstrap.css">
+        <link rel="stylesheet" href="pub/css/main.css">
     </head>
     <body>
     <div class="album py-5 bg-light">
