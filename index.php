@@ -4,12 +4,12 @@
         <title>My Demo Gallery</title>
         <link rel="stylesheet" href="/main.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="bootstrap-3.3.2/css/bootstrap.css">
+        <link rel="stylesheet" href="./main.css">
+        <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
         <link href="bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-        <script type="text/javascript" src="/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-        <script type="text/javascript" src="/fancybox/jquery.easing-1.3.pack.js"></script>
-        <script type="text/javascript" src="/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
-        <link rel="stylesheet" href="/fancybox/jquery.fancybox-1.3.4.css" type="text/css" media="screen" />
     </head>
 
     <body>
