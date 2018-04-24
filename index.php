@@ -1,7 +1,8 @@
 <?php
 
-define('PAGE_TITLE', 'Image Gallery')
-
+define('PAGE_TITLE', 'Image Gallery');
+$smallImageUrl = 'https://fakeimg.pl/300x200/282828/eae0d0/?retina=1';
+$imageUrl = 'https://fakeimg.pl/300x200/282828/eae0d0/?retina=1';
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,64 +21,64 @@ define('PAGE_TITLE', 'Image Gallery')
             <div class="row">
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <a data-fancybox="gallery" href="<?php echo "https://fakeimg.pl/300x200/282828/eae0d0/?retina=1" ?>">
-                            <img class="card-img-top" alt="Image" src="<?php echo "https://fakeimg.pl/300x200/282828/eae0d0/?retina=1" ?>">
+                        <a data-fancybox="gallery" href="<?php echo $imageUrl ?>">
+                            <img class="card-img-top" alt="Image" src="<?php echo $smallImageUrl ?>">
                         </a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <a data-fancybox="gallery" href="<?php echo "https://fakeimg.pl/300x200/282828/eae0d0/?retina=1" ?>">
-                            <img class="card-img-top" alt="Image" src="<?php echo "https://fakeimg.pl/300x200/282828/eae0d0/?retina=1" ?>">
+                        <a data-fancybox="gallery" href="<?php echo $imageUrl ?>">
+                            <img class="card-img-top" alt="Image" src="<?php echo $smallImageUrl ?>">
                         </a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <a data-fancybox="gallery" href="<?php echo "https://fakeimg.pl/300x200/282828/eae0d0/?retina=1" ?>">
-                            <img class="card-img-top" alt="Image" src="<?php echo "https://fakeimg.pl/300x200/282828/eae0d0/?retina=1" ?>">
+                        <a data-fancybox="gallery" href="<?php echo $imageUrl ?>">
+                            <img class="card-img-top" alt="Image" src="<?php echo $smallImageUrl ?>">
                         </a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <a data-fancybox="gallery" href="<?php echo "https://fakeimg.pl/300x200/282828/eae0d0/?retina=1" ?>">
-                            <img class="card-img-top" alt="Image" src="<?php echo "https://fakeimg.pl/300x200/282828/eae0d0/?retina=1" ?>">
+                        <a data-fancybox="gallery" href="<?php echo $imageUrl ?>">
+                            <img class="card-img-top" alt="Image" src="<?php echo $smallImageUrl ?>">
                         </a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <a data-fancybox="gallery" href="<?php echo "https://fakeimg.pl/300x200/282828/eae0d0/?retina=1" ?>">
-                            <img class="card-img-top" alt="Image" src="<?php echo "https://fakeimg.pl/300x200/282828/eae0d0/?retina=1" ?>">
+                        <a data-fancybox="gallery" href="<?php echo $imageUrl ?>">
+                            <img class="card-img-top" alt="Image" src="<?php echo $smallImageUrl ?>">
                         </a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <a data-fancybox="gallery" href="<?php echo "https://fakeimg.pl/300x200/282828/eae0d0/?retina=1" ?>">
-                            <img class="card-img-top" alt="Image" src="<?php echo "https://fakeimg.pl/300x200/282828/eae0d0/?retina=1" ?>">
+                        <a data-fancybox="gallery" href="<?php echo $imageUrl ?>">
+                            <img class="card-img-top" alt="Image" src="<?php echo $smallImageUrl ?>">
                         </a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <a data-fancybox="gallery" href="<?php echo "https://fakeimg.pl/300x200/282828/eae0d0/?retina=1" ?>">
-                            <img class="card-img-top" alt="Image" src="<?php echo "https://fakeimg.pl/300x200/282828/eae0d0/?retina=1" ?>">
+                        <a data-fancybox="gallery" href="<?php echo $imageUrl ?>">
+                            <img class="card-img-top" alt="Image" src="<?php echo $smallImageUrl ?>">
                         </a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <a data-fancybox="gallery" href="<?php echo "https://fakeimg.pl/300x200/282828/eae0d0/?retina=1" ?>">
-                            <img class="card-img-top" alt="Image" src="<?php echo "https://fakeimg.pl/300x200/282828/eae0d0/?retina=1" ?>">
+                        <a data-fancybox="gallery" href="<?php echo $imageUrl ?>">
+                            <img class="card-img-top" alt="Image" src="<?php echo $smallImageUrl ?>">
                         </a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <a data-fancybox="gallery" href="<?php echo "https://fakeimg.pl/300x200/282828/eae0d0/?retina=1" ?>">
-                            <img class="card-img-top" alt="Image" src="<?php echo "https://fakeimg.pl/300x200/282828/eae0d0/?retina=1" ?>">
+                        <a data-fancybox="gallery" href="<?php echo $imageUrl ?>">
+                            <img class="card-img-top" alt="Image" src="<?php echo $smallImageUrl ?>">
                         </a>
                     </div>
                 </div>
