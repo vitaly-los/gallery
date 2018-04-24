@@ -1,8 +1,12 @@
 <?php
 
+/** defined constant that consist page title  */
 define('PAGE_TITLE', 'Image Gallery');
+/** @var string small image url $smallImageUrl */
 $smallImageUrl = 'https://fakeimg.pl/300x200/282828/eae0d0/?retina=1';
+/** @var string image url $imageUrl */
 $imageUrl = 'https://fakeimg.pl/300x200/282828/eae0d0/?retina=1';
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,7 +21,7 @@ $imageUrl = 'https://fakeimg.pl/300x200/282828/eae0d0/?retina=1';
     <body>
     <div class="album py-5 bg-light">
         <div class="container">
-            <h1 class="h1 text-center">Image Gallery</h1>
+            <h1 class="h1 text-center"><?php echo PAGE_TITLE ?></h1>
             <div class="row">
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
