@@ -1,7 +1,12 @@
+<?php
+
+define('PAGE_TITLE', 'Image Gallery')
+
+?>
 <!DOCTYPE html>
 <html>
     <head>
-        <title><?php echo 'Image Gallery' ?></title>
+        <title><?php echo PAGE_TITLE ?></title>
         <link rel="stylesheet" href="pub/css/bootstrap.css">
         <link rel="stylesheet" href="pub/css/main.css">
         <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
