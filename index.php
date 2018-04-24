@@ -1,6 +1,6 @@
 <?php
 
-/** defined constant that consist page title  */
+/** defined constant that consists page title  */
 define('PAGE_TITLE', 'Image Gallery');
 /** @var string small image url $smallImageUrl */
 $smallImageUrl = 'https://fakeimg.pl/300x200/282828/eae0d0/?retina=1';
