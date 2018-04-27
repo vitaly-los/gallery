@@ -1,20 +1,8 @@
 <?php
-define('TITLE', 'My Demo Gallery'); // Add default title to index page
+include_once 'imagespath.php';
 
-/*
-Asign images path to variable.
-
-*/
-$img1 = './img/1.jpg';
-$img2 = './img/2.jpg';
-$img3 = './img/3.jpg';
-$img4 = './img/4.jpg';
-$img5 = './img/5.jpg';
-$img6 = './img/6.jpg';
-$img7 = './img/7.jpg';
-$img8 = './img/8.jpg';
-$img9 = './img/9.jpg';
 ?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,47 +20,47 @@ $img9 = './img/9.jpg';
             <div class="row">
 
                 <div class="col-sm-4 thumb">
-                    <a class="fancyimage" data-fancybox-group="group" href="<?php echo $img1; ?>">
-                        <img class="img-responsive" src="<?php echo $img1 ?>" /> </a>
+                    <a class="fancyimage" data-fancybox-group="group" href="<?php if(isset($img1) && !empty($img1)) echo $img1; ?>">
+                        <img class="img-responsive" src="<?php if(isset($img1) && !empty($img1)) echo $img1; ?>" /> </a>
                 </div>
 
                 <div class="col-sm-4 thumb">
-                    <a class="fancyimage" data-fancybox-group="group" href="<?php echo $img2 ?>">
-                        <img class="img-responsive" src="<?php echo $img2 ?>" /> </a>
+                    <a class="fancyimage" data-fancybox-group="group" href="<?php if(isset($img2) && !empty($img2)) echo $img2; ?>">
+                        <img class="img-responsive" src="<?php if(isset($img2) && !empty($img2)) echo $img2; ?>" /> </a>
                 </div>
 
                 <div class="col-sm-4 thumb">
-                    <a class="fancyimage" data-fancybox-group="group" href="<?php echo $img3 ?>">
-                        <img class="img-responsive" src="<?php echo $img3 ?>" /> </a>
+                    <a class="fancyimage" data-fancybox-group="group" href="<?php if(isset($img3) && !empty($img3)) echo $img3; ?>">
+                        <img class="img-responsive" src="<?php if(isset($img3) && !empty($img3)) echo $img3; ?>" /> </a>
                 </div>
 
                 <div class="col-sm-4 thumb">
-                    <a class="fancyimage" data-fancybox-group="group" href="<?php echo $img4 ?>">
-                        <img class="img-responsive" src="<?php echo $img4 ?>" /> </a>
+                    <a class="fancyimage" data-fancybox-group="group" href="<?php if(isset($img4) && !empty($img4)) echo $img4; ?>">
+                        <img class="img-responsive" src="<?php if(isset($img4) && !empty($img4)) echo $img4; ?>" /> </a>
                 </div>
 
                 <div class="col-sm-4 thumb">
-                    <a class="fancyimage" data-fancybox-group="group" href="<?php echo $img5 ?>">
-                        <img class="img-responsive" src="<?php echo $img5 ?>" /> </a>
+                    <a class="fancyimage" data-fancybox-group="group" href="<?php if(isset($img5) && !empty($img5)) echo $img5; ?>">
+                        <img class="img-responsive" src="<?php if(isset($img5) && !empty($img5)) echo $img5; ?>" /> </a>
                 </div>
 
                 <div class="col-sm-4 thumb">
-                    <a class="fancyimage" data-fancybox-group="group" href="<?php echo $img6 ?>">
-                        <img class="img-responsive" src="<?php echo $img6 ?>" /> </a>
+                    <a class="fancyimage" data-fancybox-group="group" href="<?php if(isset($img6) && !empty($img6)) echo $img6; ?>">
+                        <img class="img-responsive" src="<?php if(isset($img6) && !empty($img6)) echo $img6; ?>" /> </a>
                 </div>
 
                 <div class="col-sm-4 thumb">
-                    <a class="fancyimage" data-fancybox-group="group" href="<?php echo $img7 ?>">
-                        <img class="img-responsive" src="<?php echo $img7 ?>" /> </a>
+                    <a class="fancyimage" data-fancybox-group="group" href="<?php if(isset($img7) && !empty($img7)) echo $img7; ?>">
+                        <img class="img-responsive" src="<?php if(isset($img7) && !empty($img7)) echo $img7; ?>" /> </a>
                 </div>
 
                 <div class="col-sm-4 thumb">
-                    <a class="fancyimage" data-fancybox-group="group" href="<?php echo $img8 ?>">
-                        <img class="img-responsive" src="<?php echo $img8 ?>" /> </a>
+                    <a class="fancyimage" data-fancybox-group="group" href="<?php if(isset($img8) && !empty($img8)) echo $img8; ?>">
+                        <img class="img-responsive" src="<?php if(isset($img8) && !empty($img8)) echo $img8; ?>" /> </a>
                 </div>
                 <div class="col-sm-4 thumb">
-                    <a class="fancyimage" data-fancybox-group="group" href="<?php echo $img9 ?>">
-                        <img class="img-responsive" src="<?php echo $img9 ?>" /> </a>
+                    <a class="fancyimage" data-fancybox-group="group" href="<?php if(isset($img9) && !empty($img9)) echo $img9; ?>">
+                        <img class="img-responsive" src="<?php if(isset($img9) && !empty($img9)) echo $img9; ?>" /> </a>
                 </div>
 
             </div>
