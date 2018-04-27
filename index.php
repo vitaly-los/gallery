@@ -1,11 +1,6 @@
 <?php
 
-/** defined constant that consists page title  */
-define('PAGE_TITLE', 'Image Gallery');
-/** @var string small image url $smallImageUrl */
-$smallImageUrl = 'https://fakeimg.pl/300x200/282828/eae0d0/?retina=1';
-/** @var string image url $imageUrl */
-$imageUrl = 'https://fakeimg.pl/300x200/282828/eae0d0/?retina=1';
+require_once('src/app.php');
 
 ?>
 <!DOCTYPE html>
@@ -25,64 +20,64 @@ $imageUrl = 'https://fakeimg.pl/300x200/282828/eae0d0/?retina=1';
             <div class="row">
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <a data-fancybox="gallery" href="<?php echo $imageUrl ?>">
-                            <img class="card-img-top" alt="Image" src="<?php echo $smallImageUrl ?>">
+                        <a data-fancybox="gallery" href="<?php echo isset($imageUrl)?$imageUrl:IMAGE_PLACEHOLDER ?>">
+                            <img class="card-img-top" alt="Image" src="<?php echo isset($smallImageUrl)?$smallImageUrl:IMAGE_PLACEHOLDER ?>">
                         </a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <a data-fancybox="gallery" href="<?php echo $imageUrl ?>">
-                            <img class="card-img-top" alt="Image" src="<?php echo $smallImageUrl ?>">
+                        <a data-fancybox="gallery" href="<?php echo isset($imageUrl)?$imageUrl:IMAGE_PLACEHOLDER ?>">
+                            <img class="card-img-top" alt="Image" src="<?php echo isset($smallImageUrl)?$smallImageUrl:IMAGE_PLACEHOLDER ?>">
                         </a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <a data-fancybox="gallery" href="<?php echo $imageUrl ?>">
-                            <img class="card-img-top" alt="Image" src="<?php echo $smallImageUrl ?>">
+                        <a data-fancybox="gallery" href="<?php echo isset($imageUrl)?$imageUrl:IMAGE_PLACEHOLDER ?>">
+                            <img class="card-img-top" alt="Image" src="<?php echo isset($smallImageUrl)?$smallImageUrl:IMAGE_PLACEHOLDER ?>">
                         </a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <a data-fancybox="gallery" href="<?php echo $imageUrl ?>">
-                            <img class="card-img-top" alt="Image" src="<?php echo $smallImageUrl ?>">
+                        <a data-fancybox="gallery" href="<?php echo isset($imageUrl)?$imageUrl:IMAGE_PLACEHOLDER ?>">
+                            <img class="card-img-top" alt="Image" src="<?php echo isset($smallImageUrl)?$smallImageUrl:IMAGE_PLACEHOLDER ?>">
                         </a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <a data-fancybox="gallery" href="<?php echo $imageUrl ?>">
-                            <img class="card-img-top" alt="Image" src="<?php echo $smallImageUrl ?>">
+                        <a data-fancybox="gallery" href="<?php echo isset($imageUrl)?$imageUrl:IMAGE_PLACEHOLDER ?>">
+                            <img class="card-img-top" alt="Image" src="<?php echo isset($smallImageUrl)?$smallImageUrl:IMAGE_PLACEHOLDER ?>">
                         </a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <a data-fancybox="gallery" href="<?php echo $imageUrl ?>">
-                            <img class="card-img-top" alt="Image" src="<?php echo $smallImageUrl ?>">
+                        <a data-fancybox="gallery" href="<?php echo isset($imageUrl)?$imageUrl:IMAGE_PLACEHOLDER ?>">
+                            <img class="card-img-top" alt="Image" src="<?php echo isset($smallImageUrl)?$smallImageUrl:IMAGE_PLACEHOLDER ?>">
                         </a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <a data-fancybox="gallery" href="<?php echo $imageUrl ?>">
-                            <img class="card-img-top" alt="Image" src="<?php echo $smallImageUrl ?>">
+                        <a data-fancybox="gallery" href="<?php echo isset($imageUrl)?$imageUrl:IMAGE_PLACEHOLDER ?>">
+                            <img class="card-img-top" alt="Image" src="<?php echo isset($smallImageUrl)?$smallImageUrl:IMAGE_PLACEHOLDER ?>">
                         </a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <a data-fancybox="gallery" href="<?php echo $imageUrl ?>">
-                            <img class="card-img-top" alt="Image" src="<?php echo $smallImageUrl ?>">
+                        <a data-fancybox="gallery" href="<?php echo isset($imageUrl)?$imageUrl:IMAGE_PLACEHOLDER ?>">
+                            <img class="card-img-top" alt="Image" src="<?php echo isset($smallImageUrl)?$smallImageUrl:IMAGE_PLACEHOLDER ?>">
                         </a>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <a data-fancybox="gallery" href="<?php echo $imageUrl ?>">
-                            <img class="card-img-top" alt="Image" src="<?php echo $smallImageUrl ?>">
+                        <a data-fancybox="gallery" href="<?php echo isset($imageUrl)?$imageUrl:IMAGE_PLACEHOLDER ?>">
+                            <img class="card-img-top" alt="Image" src="<?php echo isset($smallImageUrl)?$smallImageUrl:IMAGE_PLACEHOLDER ?>">
                         </a>
                     </div>
                 </div>
