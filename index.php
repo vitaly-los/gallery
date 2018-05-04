@@ -18,20 +18,27 @@ require_once('src/app.php');
     <div class="container">
         <h1 class="h1 text-center"><?php echo PAGE_TITLE ?></h1>
         <div class="row">
+            <?php if (!empty($images)): ?>
             <?php foreach ($images as $image): ?>
                 <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
                         <a data-fancybox="gallery"
                            href="<?php echo isset($image['url']) ? $image['url'] : IMAGE_PLACEHOLDER ?>">
                             <img class="card-img-top" alt="Image"
-                                 src="<?php echo isset($image['thumbnail']) ? $image['thumbnail'] : IMAGE_PLACEHOLDER ?>">
+                                 src="<?php echo $image['url'] ?>">
                         </a>
                         <div class="card-body">
-                            <p class="card-text"><?php echo $image['description'] ?></p>
+                            <p class="card-text">Author: <?php echo $image['description'] ?>,
+                                Resolution: <?php echo implode('x', [$image['width'], $image['height']]) ?></p>
                         </div>
                     </div>
                 </div>
             <?php endforeach; ?>
+            <?php else: ?>
+                <div class="alert alert-danger col-12">
+                    There are no images yet :P
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
