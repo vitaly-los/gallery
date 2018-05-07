@@ -1,5 +1,7 @@
 <?php
-include_once 'imagespath.php';
+include_once './imagespath.php';
+// Set number of images on page
+$imagesOnPage = 9;
 
 ?>
 
@@ -19,55 +21,24 @@ include_once 'imagespath.php';
         <div class="container">
             <div class="row">
 
-                <div class="col-sm-4 thumb">
-                    <a class="fancyimage" data-fancybox-group="group" href="<?php if(isset($img1) && !empty($img1)) echo $img1; ?>">
-                        <img class="img-responsive" src="<?php if(isset($img1) && !empty($img1)) echo $img1; ?>" /> </a>
-                </div>
+                <?php
+                // Use foreach to make a path for original images from picsum.photos
+                foreach ($json as $key => $value) {
 
-                <div class="col-sm-4 thumb">
-                    <a class="fancyimage" data-fancybox-group="group" href="<?php if(isset($img2) && !empty($img2)) echo $img2; ?>">
-                        <img class="img-responsive" src="<?php if(isset($img2) && !empty($img2)) echo $img2; ?>" /> </a>
-                </div>
-
-                <div class="col-sm-4 thumb">
-                    <a class="fancyimage" data-fancybox-group="group" href="<?php if(isset($img3) && !empty($img3)) echo $img3; ?>">
-                        <img class="img-responsive" src="<?php if(isset($img3) && !empty($img3)) echo $img3; ?>" /> </a>
-                </div>
-
-                <div class="col-sm-4 thumb">
-                    <a class="fancyimage" data-fancybox-group="group" href="<?php if(isset($img4) && !empty($img4)) echo $img4; ?>">
-                        <img class="img-responsive" src="<?php if(isset($img4) && !empty($img4)) echo $img4; ?>" /> </a>
-                </div>
-
-                <div class="col-sm-4 thumb">
-                    <a class="fancyimage" data-fancybox-group="group" href="<?php if(isset($img5) && !empty($img5)) echo $img5; ?>">
-                        <img class="img-responsive" src="<?php if(isset($img5) && !empty($img5)) echo $img5; ?>" /> </a>
-                </div>
-
-                <div class="col-sm-4 thumb">
-                    <a class="fancyimage" data-fancybox-group="group" href="<?php if(isset($img6) && !empty($img6)) echo $img6; ?>">
-                        <img class="img-responsive" src="<?php if(isset($img6) && !empty($img6)) echo $img6; ?>" /> </a>
-                </div>
-
-                <div class="col-sm-4 thumb">
-                    <a class="fancyimage" data-fancybox-group="group" href="<?php if(isset($img7) && !empty($img7)) echo $img7; ?>">
-                        <img class="img-responsive" src="<?php if(isset($img7) && !empty($img7)) echo $img7; ?>" /> </a>
-                </div>
-
-                <div class="col-sm-4 thumb">
-                    <a class="fancyimage" data-fancybox-group="group" href="<?php if(isset($img8) && !empty($img8)) echo $img8; ?>">
-                        <img class="img-responsive" src="<?php if(isset($img8) && !empty($img8)) echo $img8; ?>" /> </a>
-                </div>
-                <div class="col-sm-4 thumb">
-                    <a class="fancyimage" data-fancybox-group="group" href="<?php if(isset($img9) && !empty($img9)) echo $img9; ?>">
-                        <img class="img-responsive" src="<?php if(isset($img9) && !empty($img9)) echo $img9; ?>" /> </a>
-                </div>
-
+                    if ($value['id'] < $imagesOnPage) {
+                        ?>
+                        <div class="col-sm-4 thumb">
+                            <a class="fancyimage" data-fancybox-group="group" href="<?php echo 'https://picsum.photos/' . $value['width'] . '/' . $value['height'] . '?image=' . $value['id']; ?>">
+                                <img class="img-responsive" src="<?php echo 'https://picsum.photos/' . $value['width'] . '/' . $value['height'] . '?image=' . $value['id']; ?>" /> </a>
+                        </div>
+                    <?php } // Close If statement
+                }  // Close foreach loop
+                ?>
             </div>
         </div>
         <script type="text/javascript"> $(document).ready(function () {
-           $("a.fancyimage").fancybox();
-       });</script>
+                $("a.fancyimage").fancybox();
+            });</script>
     </body>
 
 </html>
