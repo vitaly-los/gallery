@@ -1,5 +1,8 @@
 <?php
-
+/**
+*  Because of educational purpose and lack of time
+* I didn't made checking for empty result from external servers
+*/
 define('TITLE', 'My Demo Gallery'); // Add default title to index page
 
 // Get list of images in JSON format
