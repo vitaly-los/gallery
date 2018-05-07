@@ -7,8 +7,7 @@ define('IMAGE_PLACEHOLDER', 'https://fakeimg.pl/300x200/282828/eae0d0/?retina=1'
 /** defined constant with path to images stored in JSON format */
 define('IMAGE_RESOURCE_URL', 'https://picsum.photos/list');
 
-/**
- * Get image array
+/** Get image array
  *
  * @return array
  */
@@ -35,10 +34,12 @@ function getImages()
              * alternative solution is using https://picsum.photos/500/500/?image=16 URL
             */
             $image = imageExists($value['post_url'] . '/download');
-            list($width, $height) = getimagesize($image);
+            $width = 348;
+            $height = 0;
             $images[] = [
                 'url' => $image,
-                'thumbnail' => $value['post_url'] . '/download',
+                'thumbnail' => generateThumbnail($image, $width, $height),
+                //'thumbnail' => $image,
                 'description' => $value['author'],
                 'width' => $width,
                 'height' => $height,
@@ -54,8 +55,7 @@ function getImages()
     return $images;
 }
 
-/**
- * Sort array of images
+/** Sort array of images
  * @param $images
  */
 function sortImages(&$images)
@@ -71,8 +71,7 @@ function sortImages(&$images)
     }
 }
 
-/**
- * Get formatted current time
+/** Get formatted current time
  *
  * @return false|string
  */
@@ -94,4 +93,87 @@ function imageExists($imagePath)
     } else {
         return IMAGE_PLACEHOLDER;
     }
+}
+
+/** Generate image thumbnail in base64
+ * @param $imagePath
+ * @param $width
+ * @param $height
+ * @return string
+ */
+function generateThumbnail($imagePath, &$width, &$height)
+{
+    $params = getOriginalSize($imagePath);
+
+    return 'data:' . $params['mime'] . 'base64,' . base64_encode(resizeImage($imagePath, $width, $height, $params));
+}
+
+/** Resize Image
+ *
+ * @param $imagePath
+ * @param $width
+ * @param $height
+ * @param $params
+ * @return string
+ */
+function resizeImage($imagePath, &$width, &$height, $params)
+{
+    $mime = $params['mime'];
+
+    //use specific function based on image format
+    switch ($mime) {
+        case 'image/jpeg':
+            $imageCreateFunc = 'imagecreatefromjpeg';
+            $imageSaveFunc = 'imagejpeg';
+            break;
+
+        case 'image/png':
+            $imageCreateFunc = 'imagecreatefrompng';
+            $imageSaveFunc = 'imagepng';
+            break;
+
+        case 'image/gif':
+            $imageCreateFunc = 'imagecreatefromgif';
+            $imageSaveFunc = 'imagegif';
+            break;
+
+        default:
+            //we will handle this once work with errors
+
+    }
+
+    //Variable function
+    $img = $imageCreateFunc($imagePath);
+
+    //list is php construction that allows to set array elements to variables
+    list($originalWidth, $originalHeight) = $params;
+
+    //calculate height
+    if (!$height) {
+        $height = ($originalHeight / $originalWidth) * $width;
+    }
+    //create new image
+    $bufferImage = imagecreatetruecolor($width, $height);
+    imagecopyresampled($bufferImage, $img, 0, 0, 0, 0, $width, $height, $originalWidth, $originalHeight);
+    //save original image size to variables for later use outside of function
+    $width = $originalWidth;
+    $height = $originalHeight;
+
+    //return buffer output as string
+    ob_start();
+    $imageSaveFunc($bufferImage);
+
+    return ob_get_clean();
+
+
+}
+
+/** get image size info
+ *
+ * @param $imagePath
+ * @return array|bool
+ */
+function getOriginalSize($imagePath)
+{
+    return getimagesize($imagePath);
 }
