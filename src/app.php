@@ -105,7 +105,7 @@ function generateThumbnail($imagePath, &$width, &$height)
 {
     $params = getOriginalSize($imagePath);
 
-    return 'data:' . $params['mime'] . 'base64,' . base64_encode(resizeImage($imagePath, $width, $height, $params));
+    return 'data:' . $params['mime'] . ';base64,' . base64_encode(resizeImage($imagePath, $width, $height, $params));
 }
 
 /** Resize Image
