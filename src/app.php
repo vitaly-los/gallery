@@ -38,8 +38,8 @@ function getImages()
             $height = 0;
             $images[] = [
                 'url' => $image,
-                'thumbnail' => generateThumbnail($image, $width, $height),
-                //'thumbnail' => $image,
+                //'thumbnail' => generateThumbnail($image, $width, $height),
+                'thumbnail' => $image,
                 'description' => $value['author'],
                 'width' => $width,
                 'height' => $height,
@@ -96,6 +96,7 @@ function imageExists($imagePath)
 }
 
 /** Generate image thumbnail in base64
+ *
  * @param $imagePath
  * @param $width
  * @param $height
