@@ -17,6 +17,7 @@ require_once('src/app.php');
 <div class="album py-5 bg-light">
     <div class="container">
         <h1 class="h1 text-center"><?php echo PAGE_TITLE ?></h1>
+        <a type="button" class="btn btn-primary btn-lg active m-md-2" href="/form">Upload New Image</a>
         <div class="row">
             <?php if (!empty($images = getImages())): ?>
                 <?php foreach ($images as $image): ?>
@@ -36,7 +37,7 @@ require_once('src/app.php');
                     </div>
                 <?php endforeach; ?>
                 <nav>
-                    <ul class="pagination">
+                    <ul class="pagination m-md-2">
                         <li class="page-item"><a class="page-link" href="/?p=1">1</a></li>
                         <li class="page-item"><a class="page-link" href="/?p=2">2</a></li>
                         <li class="page-item"><a class="page-link" href="/?p=3">3</a></li>

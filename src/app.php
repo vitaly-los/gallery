@@ -19,9 +19,9 @@ function getImages()
     if (!empty($jsonList)) { //check if string is not empty
         /** @var array with images $images */
         $images = [];
-
+        $offset = $_GET['p']??0;
         //json_decode converts string to array, array_slice select first 9 elements
-        foreach (array_slice(json_decode($jsonList, true), 0, 9) as $key => $value) {
+        foreach (array_slice(json_decode($jsonList, true), $offset, 9) as $key => $value) {
             /*
              * set new array element
              *
