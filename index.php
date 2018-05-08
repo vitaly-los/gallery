@@ -1,8 +1,19 @@
 <?php
 include_once './imagespath.php';
+require_once './functions.php';
+
+// URL for images
+$content = 'https://picsum.photos/list';
+
+// If external server not work and we receive empty result kill script
+if (checkServerStatus($content) == false)
+    die('Ooops something went wrong');
+
+// Set returned array for variable
+$images = imagesList($content);
+
 // Set number of images on page
 $imagesOnPage = 9;
-
 ?>
 
 <!DOCTYPE html>
@@ -22,17 +33,17 @@ $imagesOnPage = 9;
             <div class="row">
 
                 <?php
-                // Use foreach to make a path for original images from picsum.photos
-                foreach ($json as $key => $value) {
+                foreach ($images as $image) {
 
-                    if ($value['id'] < $imagesOnPage) {
+                    if ($image['id'] < $imagesOnPage) {
                         ?>
                         <div class="col-sm-4 thumb">
-                            <a class="fancyimage" data-fancybox-group="group" href="<?php echo 'https://picsum.photos/' . $value['width'] . '/' . $value['height'] . '?image=' . $value['id']; ?>">
-                                <img class="img-responsive" src="<?php echo 'https://picsum.photos/' . $value['width'] . '/' . $value['height'] . '?image=' . $value['id']; ?>" /> </a>
+                            <a class="fancyimage" data-fancybox-group="group" href="<?php echo 'https://picsum.photos/' . $image['width'] . '/' . $image['height'] . '?image=' . $image['id']; ?>">
+                                <img class="img-responsive" src="<?php echo 'https://picsum.photos/200/200?image=' . $image['id']; ?>" /> </a>
                         </div>
-                    <?php } // Close If statement
-                }  // Close foreach loop
+                    <?php
+                    }
+                }
                 ?>
             </div>
         </div>
