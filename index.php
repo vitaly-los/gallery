@@ -1,5 +1,5 @@
 <?php
-header("HTTP/1.0 404 Not Found");
+
 switch ($_GET['page']??'') {
     case 'form':
         require('view/form.php');

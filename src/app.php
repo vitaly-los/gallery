@@ -11,17 +11,14 @@ define('IMAGE_RESOURCE_URL', 'https://picsum.photos/list');
  *
  * @return array
  */
-function getImages()
+function formatImages($data)
 {
-    //read file content to string $jsonList, @ means suppress errors in case of problems with service availability, but it's bad practice
-    $jsonList = @file_get_contents(IMAGE_RESOURCE_URL);
-
-    if (!empty($jsonList)) { //check if string is not empty
+    if (!empty($data)) { //check if array is not empty
         /** @var array with images $images */
         $images = [];
-        $offset = $_GET['p']??0;
+        $offset = $_GET['p'] - 1 ?? 0;
         //json_decode converts string to array, array_slice select first 9 elements
-        foreach (array_slice(json_decode($jsonList, true), $offset, 9) as $key => $value) {
+        foreach (array_slice($data, $offset * 9, 9) as $key => $value) {
             /*
              * set new array element
              *
@@ -177,4 +174,102 @@ function resizeImage($imagePath, &$width, &$height, $params)
 function getOriginalSize($imagePath)
 {
     return getimagesize($imagePath);
+}
+
+/** Return array with images
+ *
+ * @return mixed
+ */
+function getCollection()
+{
+    //read file content to string $jsonList, @ means suppress errors in case of problems with service availability, but it's bad practice
+    $images = @file_get_contents(IMAGE_RESOURCE_URL);
+
+    return json_decode($images, true);
+}
+
+/** Return qty of pages
+ *
+ * @param $collection
+ * @return float|int
+ */
+function getPageCount($collection)
+{
+    return count($collection) / 9;
+}
+
+/** Get last page number
+ *
+ * @param $collection
+ * @return int
+ */
+function getLastPage($collection): int
+{
+    return getPageCount($collection);
+}
+
+/** Get first page, first page is 1
+ *
+ * @return int
+ */
+function getFirstPage()
+{
+    return 1;
+}
+
+/** Get next page number
+ *
+ * @param $collection
+ * @return bool|int
+ */
+function getNextPage($collection)
+{
+    if (isset($_REQUEST['p']) && getPageCount($collection) < $_REQUEST['p']) {
+        return false;
+    } elseif (isset($_REQUEST['p'])) {
+        return $_REQUEST['p'] + 1;
+    } else {
+        return 2;
+    }
+}
+
+/** Get previous page number
+ *
+ * @return bool|int
+ */
+function getPrevPage()
+{
+    return isset($_REQUEST['p']) && $_REQUEST['p'] > 1 ? $_REQUEST['p'] - 1 : false;
+}
+
+/** Get current page number
+ *
+ * @return int
+ */
+function getCurrentPage()
+{
+    return isset($_REQUEST['p']) ? $_REQUEST['p'] : 1;
+}
+
+/** Generate pagination HTML
+ *
+ * @param $collection
+ * @return string
+ */
+function renderPagination($collection)
+{
+    $paginationHtml = '';
+    if (count($collection) / 9 > 1) {
+        $paginationHtml .= "<li class='page-item'><a class='page-link' href='/?p=" . getFirstPage() . "'>Go to first page</a></li>";
+        if ($prevPage = getPrevPage()) {
+            $paginationHtml .= "<li class='page-item'><a class='page-link' href='/?p=" . $prevPage . "'>" . $prevPage . "</a></li>";
+        }
+        $paginationHtml .= "<li class='page-item active'><a class='page-link' href='#'>" . getCurrentPage() . "</a></li>";
+        if ($nextPage = getNextPage($collection)) {
+            $paginationHtml .= "<li class='page-item'><a class='page-link' href='/?p=" . $nextPage . "'>" . $nextPage . "</a></li>";
+        }
+        $paginationHtml .= "<li class='page-item'><a class='page-link' href='/?p=" . getLastPage($collection) . "'>Go to last page</a></li>";
+    }
+
+    return $paginationHtml;
 }

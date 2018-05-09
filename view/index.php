@@ -2,6 +2,7 @@
 //loaded file with variables
 require_once('src/app.php');
 
+$collection = getCollection();
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,7 +20,7 @@ require_once('src/app.php');
         <h1 class="h1 text-center"><?php echo PAGE_TITLE ?></h1>
         <a type="button" class="btn btn-primary btn-lg active m-md-2" href="/form">Upload New Image</a>
         <div class="row">
-            <?php if (!empty($images = getImages())): ?>
+            <?php if (!empty($images = formatImages($collection))): ?>
                 <?php foreach ($images as $image): ?>
                     <div class="col-md-4">
                         <div class="card mb-4 box-shadow">
@@ -36,18 +37,18 @@ require_once('src/app.php');
                         </div>
                     </div>
                 <?php endforeach; ?>
-                <nav>
-                    <ul class="pagination m-md-2">
-                        <li class="page-item"><a class="page-link" href="/?p=1">1</a></li>
-                        <li class="page-item"><a class="page-link" href="/?p=2">2</a></li>
-                        <li class="page-item"><a class="page-link" href="/?p=3">3</a></li>
-                    </ul>
-                </nav>
             <?php else: ?>
                 <div class="alert alert-danger col-12">
                     There are no images yet :P
                 </div>
             <?php endif; ?>
+        </div>
+        <div class="d-flex p-2">
+            <nav>
+                <ul class="pagination justify-content-center">
+                    <?php echo renderPagination($collection) ?>
+                </ul>
+            </nav>
         </div>
     </div>
 </div>
