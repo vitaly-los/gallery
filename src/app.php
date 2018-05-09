@@ -16,7 +16,7 @@ function formatImages($data)
     if (!empty($data)) { //check if array is not empty
         /** @var array with images $images */
         $images = [];
-        $offset = $_GET['p'] - 1 ?? 0;
+        $offset = isset($_GET['p']) ? $_GET['p'] - 1 : 0;
         //json_decode converts string to array, array_slice select first 9 elements
         foreach (array_slice($data, $offset * 9, 9) as $key => $value) {
             /*

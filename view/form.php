@@ -24,7 +24,8 @@
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-10">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <a class="btn btn-light" href="/">Back to Gallery</a>
+                            <button type="submit" class="btn btn-dark">Submit</button>
                         </div>
                     </div>
                 </form>

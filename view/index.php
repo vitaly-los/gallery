@@ -18,7 +18,7 @@ $collection = getCollection();
 <div class="album py-5 bg-light">
     <div class="container">
         <h1 class="h1 text-center"><?php echo PAGE_TITLE ?></h1>
-        <a type="button" class="btn btn-primary btn-lg active m-md-2" href="/form">Upload New Image</a>
+        <a class="btn btn-dark btn-lg active m-md-2" href="/form">Upload New Image</a>
         <div class="row">
             <?php if (!empty($images = formatImages($collection))): ?>
                 <?php foreach ($images as $image): ?>
