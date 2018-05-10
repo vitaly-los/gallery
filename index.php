@@ -58,6 +58,4 @@ $imagesOnPage = 9;
         <script type="text/javascript"> $(document).ready(function () {
                 $("a.fancyimage").fancybox();
             });</script>
-    </body>
-
-</html>
+<?php require_once './template/footer.php'; ?>
