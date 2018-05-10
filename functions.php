@@ -13,6 +13,7 @@ function checkServerStatus($content)
 }
 
 /**
+ *
  * @param string list of images in JSON format
  * @return array
  */
@@ -32,4 +33,26 @@ function imagesList(string $content)
         ];
     }
     return $imagesList;
+}
+
+/**
+ *
+ * @param string $data
+ * @return type
+ */
+function test_input(string $data)
+{
+    return trim(htmlspecialchars(stripslashes($data)));
+}
+
+/**
+ *
+ * @param string $value
+ * @param int $max
+ * @return boolean
+ */
+function stringLengh(string $value, int $max)
+{
+    $lenth = strlen($value);
+    return $lenth < $max;
 }
