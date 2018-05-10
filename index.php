@@ -37,25 +37,4 @@ $images = imagesList($content);
 $imagesOnPage = 9;
 ?>
 
-        <div class="container">
-            <div class="row">
-
-                <?php
-                foreach ($images as $image) {
-
-                    if ($image['id'] < $imagesOnPage) {
-                        ?>
-                        <div class="col-sm-4 thumb">
-                            <a class="fancyimage" data-fancybox-group="group" href="<?php echo 'https://picsum.photos/' . $image['width'] . '/' . $image['height'] . '?image=' . $image['id']; ?>">
-                                <img class="img-responsive" src="<?php echo 'https://picsum.photos/200/200?image=' . $image['id']; ?>" /> </a>
-                        </div>
-                    <?php
-                    }
-                }
-                ?>
-            </div>
-        </div>
-        <script type="text/javascript"> $(document).ready(function () {
-                $("a.fancyimage").fancybox();
-            });</script>
 <?php require_once './template/footer.php'; ?>
