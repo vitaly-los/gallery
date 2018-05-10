@@ -1,7 +1,28 @@
 <?php
-include_once './imagespath.php';
+require_once './template/header.php';
+require_once './imagespath.php';
 require_once './functions.php';
+?>
 
+<?php
+
+// Filter paramert's from GET form
+$page = (string)filter_input(INPUT_GET, 'page', FILTER_SANITIZE_STRING);
+
+switch ($page){
+    case 'form':
+        require_once './view/form.php';
+        break;
+    case 'gallery':
+        require_once './view/gallery.php';
+        break;
+    default:
+        require_once './index.php';
+}
+
+?>
+
+<?php
 // URL for images
 $content = 'https://picsum.photos/list';
 
@@ -16,19 +37,6 @@ $images = imagesList($content);
 $imagesOnPage = 9;
 ?>
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title><?php echo TITLE; ?></title>
-        <link rel="stylesheet" href="/main.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
-        <link href="bootstrap-3.3.2/css/bootstrap.min.css" rel="stylesheet">
-    </head>
-
-    <body>
         <div class="container">
             <div class="row">
 
