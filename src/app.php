@@ -4,8 +4,8 @@
 define('PAGE_TITLE', 'Image Gallery');
 /** defined image placeholder  */
 define('IMAGE_PLACEHOLDER', 'https://fakeimg.pl/300x200/282828/eae0d0/?retina=1');
-/** defined constant with path to images stored in JSON format */
-define('IMAGE_RESOURCE_URL', 'https://picsum.photos/list');
+/** defined constant with path to images stored folder */
+define('IMAGE_RESOURCE_URL', 'pub/media/images/');
 
 /** Get image array
  *
@@ -30,14 +30,14 @@ function formatImages($data)
              * found url with direct link to image in source of page https://unsplash.com/photos/gkT4FfgHO5o/download?force=true
              * alternative solution is using https://picsum.photos/500/500/?image=16 URL
             */
-            $image = imageExists($value['post_url'] . '/download');
+            $image = imageExists($value);
             $width = 348;
             $height = 0;
             $images[] = [
                 'url' => $image,
                 //'thumbnail' => generateThumbnail($image, $width, $height),
                 'thumbnail' => $image,
-                'description' => $value['author'],
+                'description' => '',//$value['author'],
                 'width' => $width,
                 'height' => $height,
                 'created_at' => getCurrentDate()
@@ -85,8 +85,8 @@ function getCurrentDate()
  */
 function imageExists($imagePath)
 {
-    if (isset($imagePath) && !empty($imagePath)) {
-        return $imagePath;
+    if (file_exists(IMAGE_RESOURCE_URL . $imagePath)) {
+        return IMAGE_RESOURCE_URL . $imagePath;
     } else {
         return IMAGE_PLACEHOLDER;
     }
@@ -182,10 +182,10 @@ function getOriginalSize($imagePath)
  */
 function getCollection()
 {
-    //read file content to string $jsonList, @ means suppress errors in case of problems with service availability, but it's bad practice
-    $images = @file_get_contents(IMAGE_RESOURCE_URL);
-
-    return json_decode($images, true);
+    $images = array_filter(scandir(IMAGE_RESOURCE_URL), function($item) {
+        return !is_dir(IMAGE_RESOURCE_URL . $item);
+    });
+    return $images;
 }
 
 /** Return qty of pages
