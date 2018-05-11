@@ -5,7 +5,8 @@ define('PAGE_TITLE', 'Image Gallery');
 /** defined image placeholder  */
 define('IMAGE_PLACEHOLDER', 'https://fakeimg.pl/300x200/282828/eae0d0/?retina=1');
 /** defined constant with path to images stored folder */
-define('IMAGE_RESOURCE_URL', 'pub/media/images/');
+define('IMAGE_RESOURCE_URL', 'pub/media/images/');/** defined constant with path to images stored folder */
+define('IMAGE_THUMBNAIL_URL', 'pub/media/thumbnails/');
 
 /** Get image array
  *
@@ -35,8 +36,8 @@ function formatImages($data)
             $height = 0;
             $images[] = [
                 'url' => $image,
-                //'thumbnail' => generateThumbnail($image, $width, $height),
-                'thumbnail' => $image,
+                'thumbnail' => generateThumbnail($image, $width, $height),
+                //'thumbnail' => $image,
                 'description' => '',//$value['author'],
                 'width' => $width,
                 'height' => $height,
@@ -102,8 +103,13 @@ function imageExists($imagePath)
 function generateThumbnail($imagePath, &$width, &$height)
 {
     $params = getOriginalSize($imagePath);
-
-    return 'data:' . $params['mime'] . ';base64,' . base64_encode(resizeImage($imagePath, $width, $height, $params));
+    $thumnailPath = resizeImage($imagePath, $width, $height, $params);
+    list($width, $height) = $params;
+    if ($thumnailPath) {
+        return $thumnailPath;
+    } else {
+        return IMAGE_PLACEHOLDER;
+    }
 }
 
 /** Resize Image
@@ -114,8 +120,13 @@ function generateThumbnail($imagePath, &$width, &$height)
  * @param $params
  * @return string
  */
-function resizeImage($imagePath, &$width, &$height, $params)
+function resizeImage($imagePath, $width, $height, $params)
 {
+    $filename = IMAGE_THUMBNAIL_URL . basename($imagePath);
+    if (file_exists($filename)) {
+        return $filename;
+    }
+
     $mime = $params['mime'];
 
     //use specific function based on image format
@@ -153,16 +164,17 @@ function resizeImage($imagePath, &$width, &$height, $params)
     //create new image
     $bufferImage = imagecreatetruecolor($width, $height);
     imagecopyresampled($bufferImage, $img, 0, 0, 0, 0, $width, $height, $originalWidth, $originalHeight);
-    //save original image size to variables for later use outside of function
-    $width = $originalWidth;
-    $height = $originalHeight;
 
     //return buffer output as string
     ob_start();
     $imageSaveFunc($bufferImage);
+    $imageSource = ob_get_clean();
 
-    return ob_get_clean();
+    if (file_put_contents($filename, $imageSource)) {
+        return $filename;
+    }
 
+    return false;
 
 }
 
