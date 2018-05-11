@@ -273,3 +273,20 @@ function renderPagination($collection)
 
     return $paginationHtml;
 }
+
+/** Get errors from request
+ *
+ * @return bool|string
+ */
+function getErrors()
+{
+    if (isset($_REQUEST['errors']) && !empty($_REQUEST['errors'])) {
+        $errors = '';
+        foreach ($_REQUEST['errors'] as $error) {
+            $errors .= $error . '<br>';
+        }
+        return $errors;
+    }
+
+    return false;
+}
