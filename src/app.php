@@ -5,8 +5,11 @@ define('PAGE_TITLE', 'Image Gallery');
 /** defined image placeholder  */
 define('IMAGE_PLACEHOLDER', 'https://fakeimg.pl/300x200/282828/eae0d0/?retina=1');
 /** defined constant with path to images stored folder */
-define('IMAGE_RESOURCE_URL', 'pub/media/images/');/** defined constant with path to images stored folder */
+define('IMAGE_RESOURCE_URL', 'pub/media/images/');
+/** defined constant with path to images stored folder */
 define('IMAGE_THUMBNAIL_URL', 'pub/media/thumbnails/');
+/** defined constant with path to csv files */
+define('DATA_PATH', 'pub/media/data/');
 
 /** Get image array
  *
@@ -34,11 +37,13 @@ function formatImages($data)
             $image = imageExists($value);
             $width = 348;
             $height = 0;
+            list($author, $description) = getData($image);
             $images[] = [
                 'url' => $image,
                 'thumbnail' => generateThumbnail($image, $width, $height),
                 //'thumbnail' => $image,
-                'description' => '',//$value['author'],
+                'author' => $author,
+                'description' => $description,
                 'width' => $width,
                 'height' => $height,
                 'created_at' => getCurrentDate()
@@ -102,6 +107,10 @@ function imageExists($imagePath)
  */
 function generateThumbnail($imagePath, &$width, &$height)
 {
+    if (!createDir(IMAGE_THUMBNAIL_URL)) {
+        return IMAGE_PLACEHOLDER;
+    }
+
     $params = getOriginalSize($imagePath);
     $thumnailPath = resizeImage($imagePath, $width, $height, $params);
     list($width, $height) = $params;
@@ -194,10 +203,13 @@ function getOriginalSize($imagePath)
  */
 function getCollection()
 {
-    $images = array_filter(scandir(IMAGE_RESOURCE_URL), function($item) {
-        return !is_dir(IMAGE_RESOURCE_URL . $item);
-    });
-    return $images;
+    if (file_exists(IMAGE_RESOURCE_URL)) {
+        $images = array_filter(scandir(IMAGE_RESOURCE_URL), function ($item) {
+            return !is_dir(IMAGE_RESOURCE_URL . $item);
+        });
+        return $images;
+    }
+    return false;
 }
 
 /** Return qty of pages
@@ -301,4 +313,136 @@ function getErrors()
     }
 
     return false;
+}
+
+/** Validate field values
+ *
+ * @param $data
+ * @return array|bool
+ */
+function validate($data)
+{
+    $errors = array();
+
+    if (empty($data['authorname']) || strlen($data['authorname']) > 40) {
+        $errors[] = 'Author shouldn\'t be empty or more 40 characters';
+    }
+
+    if (empty($data['description']) || strlen($data['description']) > 255) {
+        $errors[] = 'Description shouldn\'t be empty or more 255 characters';
+    }
+    if (empty($_FILES)) {
+        $errors[] = 'You should choose file';
+    }
+    if (!in_array(getimagesize($_FILES['image']['tmp_name'])['mime'], ['image/jpeg', 'image/png', 'image/gif'])) {
+        $errors[] = 'File should be JPEG, PNG, GIF';
+    }
+
+    if (!empty($errors)) {
+        return $errors;
+    } else {
+        return true;
+    }
+}
+
+/** Processing data from form
+ *
+ * @param $data
+ */
+function process(&$data)
+{
+    if (is_array($data)) {
+        foreach ($data as &$value) {
+            addslashes($value);
+        }
+    }
+}
+
+/** Move file into destination directory, check directory existing
+ *
+ * @param $file
+ * @return bool|string
+ */
+function uploadFile($file)
+{
+    if (!createDir(IMAGE_RESOURCE_URL)) {
+        return false;
+    }
+
+    $filename = IMAGE_RESOURCE_URL . time() . $file['name'];
+    if (move_uploaded_file($file['tmp_name'], $filename)) {
+        return $filename;
+    }
+
+    return false;
+}
+
+/** save data from form to CSV file, check directory existing
+ *
+ * @param $filename
+ * @return bool
+ */
+function saveData($filename)
+{
+    if (!createDir(DATA_PATH)) {
+        return false;
+    }
+
+    $handle = fopen(DATA_PATH . basename($filename) . '.csv', 'w');
+    if ($handle) {
+        fputcsv($handle, array($_REQUEST['authorname'], $_REQUEST['description']));
+    }
+
+    fclose($handle);
+
+    return true;
+}
+
+/** save everything including file, form data and generate thumbnail
+ *
+ * @return bool
+ */
+function save()
+{
+    if ($filename = uploadFile($_FILES['image'])) {
+        $width = 348;
+        $height = 0;
+        generateThumbnail($filename, $width, $height);
+        if (!saveData($filename)) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+/** Get data from CSV file
+ *
+ * @param $filename
+ * @return array|bool|false|null
+ */
+function getData($filename)
+{
+    if (file_exists(DATA_PATH . basename($filename) . '.csv')) {
+        $handle = fopen(DATA_PATH . basename($filename) . '.csv', 'r');
+        if ($handle) {
+            return fgetcsv($handle);
+        }
+        fclose($handle);
+    }
+
+    return false;
+}
+
+/** Check directory existing and create it if not
+ *
+ * @param $path
+ * @return bool
+ */
+function createDir($path)
+{
+    if (!file_exists($path)) {
+        return mkdir($path, 0777);
+    }
+    return true;
 }

@@ -29,7 +29,8 @@ $collection = getCollection();
                                 <img class="card-img-top" alt="Image" src="<?php echo $image['thumbnail'] ?>">
                             </a>
                             <div class="card-body">
-                                <p class="card-text">Author: <?php echo $image['description'] ?>,
+                                <p class="card-text">Author: <?php echo $image['author'] ?>,
+                                    Description: <?php echo $image['description'] ?>,
                                     Resolution: <?php echo implode('x', [$image['width'], $image['height']]) ?>
                                     Created at: <?php echo $image['created_at'] ?>
                                 </p>

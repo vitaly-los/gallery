@@ -1,47 +1,16 @@
 <?php
 
-/** Validate field values
- *
- * @param $data
- * @return array|bool
- */
-function validate($data)
-{
-    $errors = array();
-
-    if (empty($data['authorname']) || strlen($data['authorname']) > 40) {
-        $errors[] = 'Author shouldn\'t be empty or more 40 characters';
-    }
-
-    if (empty($data['description']) || strlen($data['description']) > 255) {
-        $errors[] = 'Description shouldn\'t be empty or more 255 characters';
-    }
-
-    if (!empty($errors)) {
-        return $errors;
-    } else {
-        return true;
-    }
-}
-
-/** Processing data from form
- *
- * @param $data
- */
-function process(&$data)
-{
-    if (is_array($data)) {
-        foreach ($data as &$value) {
-            addslashes($value);
-        }
-    }
-}
+require_once('src/app.php');
 
 $request = $_REQUEST;
-if (($valid = validate($request)) === true) {
-    process($request);
-    header('Location: /');
-} else {
+move_uploaded_file($_FILES['image']['tmp_name'], '/text.jpg');
 
+if (($valid = validate($request)) === true) {
+    if (save()) {
+        header('Location: /');
+    } else {
+        header('Location: /form?' . http_build_query(array('errors[]' => 'Something went wrong')));
+    }
+} else {
     header('Location: /form?' . http_build_query(array('errors' => $valid)));
 }
