@@ -7,6 +7,9 @@ switch ($_GET['page']??'') {
     case 'submit':
         require('src/process.php');
         break;
+    case 'login':
+        require('view/login.php');
+        break;
     default:
         require('view/index.php');
 }
