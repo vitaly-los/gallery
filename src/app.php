@@ -446,3 +446,32 @@ function createDir($path)
     }
     return true;
 }
+
+/** Check if user is logged in
+ *
+ * @return bool
+ */
+function isLoggedIn()
+{
+    if (isset($_SESSION['auth']) && $_SESSION['auth'] === true) {
+        return true;
+    }
+
+    return false;
+}
+
+/** Check if page is allowed for non logged in users
+ *
+ * @param $page
+ * @return mixed
+ */
+function isAllowedPage($page)
+{
+    if (!isLoggedIn() && $page == 'form') {
+        header('Location: /');
+        exit();
+    }
+
+    return $page;
+}
+

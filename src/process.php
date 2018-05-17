@@ -1,7 +1,5 @@
 <?php
 
-require_once('src/app.php');
-
 $request = $_REQUEST;
 
 if (($valid = validate($request)) === true) {

@@ -1,4 +1,3 @@
-<?php require_once('src/app.php') ?>
 <!DOCTYPE html>
 <html>
 <head>

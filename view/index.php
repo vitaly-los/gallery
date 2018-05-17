@@ -1,7 +1,4 @@
 <?php
-//loaded file with variables
-require_once('src/app.php');
-
 $collection = getCollection();
 ?>
 <!DOCTYPE html>
@@ -18,7 +15,9 @@ $collection = getCollection();
 <div class="album py-5 bg-light">
     <div class="container">
         <h1 class="h1 text-center"><?php echo PAGE_TITLE ?></h1>
+        <?php if (isLoggedIn()) :?>
         <a class="btn btn-dark btn-lg active m-md-2" href="/form">Upload New Image</a>
+        <?php endif; ?>
         <div class="row">
             <?php if (!empty($images = formatImages($collection))): ?>
                 <?php foreach ($images as $image): ?>

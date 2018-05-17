@@ -1,6 +1,10 @@
 <?php
 
-switch ($_GET['page']??'') {
+session_start();
+//loaded file with all  functions
+require_once('src/app.php');
+
+switch (isAllowedPage($_GET['page']??'')) {
     case 'form':
         require('view/form.php');
         break;
