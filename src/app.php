@@ -10,6 +10,8 @@ define('IMAGE_RESOURCE_URL', 'pub/media/images/');
 define('IMAGE_THUMBNAIL_URL', 'pub/media/thumbnails/');
 /** defined constant with path to csv files */
 define('DATA_PATH', 'pub/media/data/');
+/** text file with users list */
+define('USERS_FILE', 'var/users.txt');
 
 /** Get image array
  *
@@ -315,12 +317,12 @@ function getErrors()
     return false;
 }
 
-/** Validate field values
+/** Validate upload form field values
  *
  * @param $data
  * @return array|bool
  */
-function validate($data)
+function validateUpload($data)
 {
     $errors = array();
 
@@ -475,3 +477,49 @@ function isAllowedPage($page)
     return $page;
 }
 
+/** Authorize user
+ *
+ * @param $postUser
+ * @param $postPass
+ * @return bool
+ */
+function authUser($postUser, $postPass)
+{
+    if (file_exists(USERS_FILE)) {
+        $users = file(USERS_FILE);
+        foreach ($users as $user) {
+            list($user, $password) = explode(':', $user);
+            if (trim($user) == $postUser && trim($password) == $postPass) {
+                $_SESSION['auth'] = true;
+                return true;
+                break;
+            }
+        }
+    }
+    return false;
+}
+
+/** Validate login form field values
+ *
+ * @param $data
+ * @return array|bool
+ */
+function validateLogin($data)
+{
+    $errors = array();
+
+    if (empty($data['login'])) {
+        $errors[] = 'Login shouldn\'t be empty';
+    }
+
+    if (empty($data['pass'])) {
+        $errors[] = 'Password shouldn\'t be empty';
+    }
+
+
+    if (!empty($errors)) {
+        return $errors;
+    } else {
+        return true;
+    }
+}

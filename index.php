@@ -14,6 +14,9 @@ switch (isAllowedPage($_GET['page']??'')) {
     case 'login':
         require('view/login.php');
         break;
+    case 'processLogin':
+        require('src/processLogin.php');
+        break;
     default:
         require('view/index.php');
 }

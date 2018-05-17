@@ -14,7 +14,7 @@
                 <strong>Error:&nbsp;</strong><?php echo $errors ?>
             </div>
         <?php endif; ?>
-        <form action="/loginProcess" method="post">
+        <form action="/processLogin" method="post">
             <div class="form-group">
                 <label for="login">Login</label>
                 <input type="text" class="form-control" id="login" name="login">
