@@ -306,11 +306,12 @@ function renderPagination($collection)
  */
 function getErrors()
 {
-    if (isset($_REQUEST['errors']) && !empty($_REQUEST['errors'])) {
+    if (isset($_SESSION['errors']) && !empty($_SESSION['errors'])) {
         $errors = '';
-        foreach ($_REQUEST['errors'] as $error) {
+        foreach ($_SESSION['errors'] as $error) {
             $errors .= $error . '<br>';
         }
+        unset($_SESSION['errors']);
         return $errors;
     }
 
@@ -341,7 +342,9 @@ function validateUpload($data)
     }
 
     if (!empty($errors)) {
-        return $errors;
+        $_SESSION['fields'] = $data;
+        $_SESSION['errors'] = $errors;
+        return false;
     } else {
         return true;
     }
@@ -414,6 +417,7 @@ function save()
             return false;
         }
     }
+    unset($_SESSION['fields']);
 
     return true;
 }
@@ -491,11 +495,15 @@ function authUser($postUser, $postPass)
             list($user, $password) = explode(':', $user);
             if (trim($user) == $postUser && trim($password) == $postPass) {
                 $_SESSION['auth'] = true;
+                unset($_SESSION['fields']);
                 return true;
                 break;
             }
         }
     }
+    $_SESSION['errors'] = ['Incorrect Login'];
+    $_SESSION['fields'] = $_POST;
+
     return false;
 }
 
@@ -518,8 +526,19 @@ function validateLogin($data)
 
 
     if (!empty($errors)) {
-        return $errors;
+        $_SESSION['errors'] = $errors;
+        $_SESSION['fields'] = $data;
+        return false;
     } else {
         return true;
     }
+}
+
+function getFieldValue($field)
+{
+    if (isset($_SESSION['fields'][$field])) {
+        return $_SESSION['fields'][$field];
+    }
+
+    return '';
 }

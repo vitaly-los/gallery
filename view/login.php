@@ -17,7 +17,7 @@
         <form action="/processLogin" method="post">
             <div class="form-group">
                 <label for="login">Login</label>
-                <input type="text" class="form-control" id="login" name="login">
+                <input type="text" class="form-control" id="login" name="login" value="<?php echo getFieldValue('login') ?>">
             </div>
             <div class="form-group">
                 <label for="description">Password</label>
