@@ -417,6 +417,7 @@ function save()
             return false;
         }
     }
+    $_SESSION['messages'] = ['You have uploaded new image'];
     unset($_SESSION['fields']);
 
     return true;
@@ -495,6 +496,7 @@ function authUser($postUser, $postPass)
             list($user, $password) = explode(':', $user);
             if (trim($user) == $postUser && trim($password) == $postPass) {
                 $_SESSION['auth'] = true;
+                $_SESSION['messages'] = ['You have logged in successfuly'];
                 unset($_SESSION['fields']);
                 return true;
                 break;
@@ -534,6 +536,11 @@ function validateLogin($data)
     }
 }
 
+/** Get filed value from session
+ *
+ * @param $field
+ * @return string
+ */
 function getFieldValue($field)
 {
     if (isset($_SESSION['fields'][$field])) {
@@ -541,4 +548,32 @@ function getFieldValue($field)
     }
 
     return '';
+}
+
+/** Get messages from session
+ *
+ * @return bool|string
+ */
+function getMessages()
+{
+    if (isset($_SESSION['messages']) && !empty($_SESSION['messages'])) {
+        $messages = '';
+        foreach ($_SESSION['messages'] as $message) {
+            $messages .= $message . '<br>';
+        }
+        unset($_SESSION['messages']);
+        return $messages;
+    }
+
+    return false;
+}
+
+/** Unset auth session
+ *
+ */
+function logOut()
+{
+    unset($_SESSION['auth']);
+    $_SESSION['messages'] = ['You have logged out'];
+    header('Location: /');
 }

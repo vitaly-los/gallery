@@ -14,9 +14,24 @@ $collection = getCollection();
 <body>
 <div class="album py-5 bg-light">
     <div class="container">
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <?php if (isLoggedIn()): ?>
+                    <a class="nav-link active" href="/logout">Log out</a>
+                <?php else: ?>
+                    <a class="nav-link active" href="/login">Login</a>
+                <?php endif; ?>
+            </li>
+
+        </ul>
         <h1 class="h1 text-center"><?php echo PAGE_TITLE ?></h1>
         <?php if (isLoggedIn()) :?>
         <a class="btn btn-dark btn-lg active m-md-2" href="/form">Upload New Image</a>
+        <?php endif; ?>
+        <?php if ($messages = getMessages()): ?>
+            <div class="alert alert-success">
+                <?php echo $messages ?>
+            </div>
         <?php endif; ?>
         <div class="row">
             <?php if (!empty($images = formatImages($collection))): ?>
