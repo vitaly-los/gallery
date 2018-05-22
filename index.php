@@ -4,6 +4,11 @@ session_start();
 //loaded file with all  functions
 require_once('src/app.php');
 
+//registered error handler and shutdown functions
+set_error_handler('errorHandler', -1);
+set_exception_handler('exceptionHandler');
+register_shutdown_function('shutDown');
+
 switch (isAllowedPage($_GET['page']??'')) {
     case 'form':
         require('view/form.php');

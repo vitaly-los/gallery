@@ -12,10 +12,14 @@ define('IMAGE_THUMBNAIL_URL', 'pub/media/thumbnails/');
 define('DATA_PATH', 'pub/media/data/');
 /** text file with users list */
 define('USERS_FILE', 'var/users.txt');
+/** text file with users list */
+define('ERROR_LOG', 'var/error.log');
 
 /** Get image array
  *
+ * @param $data
  * @return array
+ * @throws Exception
  */
 function formatImages($data)
 {
@@ -100,12 +104,13 @@ function imageExists($imagePath)
     }
 }
 
-/** Generate image thumbnail in base64
+/** Generate image thumbnail
  *
  * @param $imagePath
  * @param $width
  * @param $height
- * @return string
+ * @return bool|string
+ * @throws Exception
  */
 function generateThumbnail($imagePath, &$width, &$height)
 {
@@ -129,7 +134,8 @@ function generateThumbnail($imagePath, &$width, &$height)
  * @param $width
  * @param $height
  * @param $params
- * @return string
+ * @return bool|string
+ * @throws Exception
  */
 function resizeImage($imagePath, $width, $height, $params)
 {
@@ -158,8 +164,7 @@ function resizeImage($imagePath, $width, $height, $params)
             break;
 
         default:
-            //we will handle this once work with errors
-
+            throw new Exception('this file format isn\'t supported');
     }
 
     //Variable function
@@ -576,4 +581,37 @@ function logOut()
     unset($_SESSION['auth']);
     $_SESSION['messages'] = ['You have logged out'];
     header('Location: /');
+}
+
+/** Write error to log file
+ *
+ * @param $errorNo
+ * @param $errorMessage
+ * @param $errorFile
+ * @param $errorLine
+ */
+function errorHandler($errorNo, $errorMessage, $errorFile, $errorLine)
+{
+    $error = 'Error level: ' . $errorNo . ' Text: ' . $errorMessage . ' in file: ' . $errorFile . ' on line: ' . $errorLine . "\n";
+    error_log($error, 3, $_SERVER['DOCUMENT_ROOT'] . ERROR_LOG);
+}
+
+/** Write fatal error to log file and show error page
+ */
+function shutDown()
+{
+    if ($error = error_get_last()) {
+        error_log($error['message'], 3, $_SERVER['DOCUMENT_ROOT'] . ERROR_LOG);
+        require($_SERVER['DOCUMENT_ROOT'] . 'view/error.php');
+    }
+}
+
+/** Write exception to log and show error page
+ *
+ * @param $e
+ */
+function exceptionHandler($e)
+{
+    error_log($e->getMessage(), 3, $_SERVER['DOCUMENT_ROOT'] . ERROR_LOG);
+    require($_SERVER['DOCUMENT_ROOT'] . 'view/error.php');
 }

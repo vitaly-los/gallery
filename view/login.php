@@ -23,6 +23,10 @@
                 <label for="description">Password</label>
                 <input type="password" class="form-control" id="pass" name="pass">
             </div>
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                <label class="form-check-label" for="remember">Remember me</label>
+            </div>
             <div class="form-group row">
                 <div class="col-sm-10">
                     <a class="btn btn-light" href="/">Back to Gallery</a>
