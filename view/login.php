@@ -20,7 +20,7 @@
                 <input type="text" class="form-control" id="login" name="login" value="<?php echo getFieldValue('login') ?>">
             </div>
             <div class="form-group">
-                <label for="description">Password</label>
+                <label for="pass">Password</label>
                 <input type="password" class="form-control" id="pass" name="pass">
             </div>
             <div class="form-check">

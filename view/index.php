@@ -25,8 +25,8 @@ $collection = getCollection();
 
         </ul>
         <h1 class="h1 text-center"><?php echo PAGE_TITLE ?></h1>
-        <?php if (isLoggedIn()) :?>
-        <a class="btn btn-dark btn-lg active m-md-2" href="/form">Upload New Image</a>
+        <?php if (isLoggedIn()) : ?>
+            <a class="btn btn-dark btn-lg active m-md-2" href="/form">Upload New Image</a>
         <?php endif; ?>
         <?php if ($messages = getMessages()): ?>
             <div class="alert alert-success">
@@ -49,6 +49,12 @@ $collection = getCollection();
                                     Created at: <?php echo $image['created_at'] ?>
                                 </p>
                             </div>
+                            <?php if (isLoggedIn()): ?>
+                                <button type="button" class="btn btn-danger btn-xs"
+                                        onclick="if (confirm('Are you sure?')) {location.href = '/removeImage?path=<?php echo urlencode($image['url']) ?>';}">
+                                    Delete
+                                </button>
+                            <?php endif; ?>
                         </div>
                     </div>
                 <?php endforeach; ?>

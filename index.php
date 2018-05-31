@@ -25,6 +25,12 @@ switch (isAllowedPage($_GET['page']??'')) {
     case 'processLogin':
         require('src/processLogin.php');
         break;
+    case 'register':
+        require('view/register.php');
+        break;
+    case 'removeImage':
+        require('src/removeImage.php');
+        break;
     default:
         require('view/index.php');
 }

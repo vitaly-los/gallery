@@ -615,3 +615,20 @@ function exceptionHandler($e)
     error_log($e->getMessage(), 3, $_SERVER['DOCUMENT_ROOT'] . ERROR_LOG);
     require($_SERVER['DOCUMENT_ROOT'] . 'view/error.php');
 }
+
+/** Remove image
+ *
+ * @param $imagePath
+ * @return bool
+ */
+function deleteImage($imagePath)
+{
+    if (isLoggedIn()) {
+        unlink($imagePath);
+        $_SESSION['messages'] = ['You have deleted image'];
+        return true;
+    } else {
+        $_SESSION['errors'] = ['You haven\'t permitted to delete images'];
+        return false;
+    }
+}
