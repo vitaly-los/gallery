@@ -479,7 +479,7 @@ function isLoggedIn()
  */
 function isAllowedPage($page)
 {
-    if (!isLoggedIn() && $page == 'form') {
+    if ((!isLoggedIn() && $page == 'form') || (isLoggedIn() && ($page == 'login' || $page == 'register'))) {
         header('Location: /');
         exit();
     }
