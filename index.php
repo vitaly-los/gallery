@@ -28,6 +28,9 @@ switch (isAllowedPage($_GET['page']??'')) {
     case 'register':
         require('view/register.php');
         break;
+    case 'processRegister':
+        require('src/processRegister.php');
+        break;
     case 'removeImage':
         require('src/removeImage.php');
         break;

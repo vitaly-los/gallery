@@ -632,3 +632,58 @@ function deleteImage($imagePath)
         return false;
     }
 }
+
+/** Validate registration form
+ *
+ * @param $data
+ * @return bool
+ */
+function validateRegistration($data)
+{
+    $errors = array();
+
+    if (empty($data['login'])) {
+        $errors[] = 'Login shouldn\'t be empty';
+    }
+
+    if (empty($data['pass']) || empty($data['repass'])) {
+        $errors[] = 'Password shouldn\'t be empty';
+    }
+
+    if ($data['pass'] != $data['repass']) {
+        $errors[] = 'Passwords don\'t match';
+    }
+
+
+    if (!empty($errors)) {
+        $_SESSION['errors'] = $errors;
+        $_SESSION['fields'] = $data;
+        return false;
+    } else {
+        return true;
+    }
+}
+
+/** add user info into file and auth user
+ *
+ * @param $login
+ * @param $pass
+ * @return bool
+ */
+function createUser($login, $pass)
+{
+    if (file_exists(USERS_FILE)) {
+        $userFile = fopen(USERS_FILE, 'a+');
+    } else {
+        $userFile = fopen(USERS_FILE, 'w');
+    }
+    if (fwrite($userFile, implode(':', array($login, $pass)) . "\n")) {
+        $_SESSION['messages'][] = 'Your account has been created';
+        authUser($login, $pass);
+        return true;
+    }
+    fclose($userFile);
+
+    $_SESSION['errors'] = ['Something went wrong'];
+    return false;
+}

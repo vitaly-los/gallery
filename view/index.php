@@ -15,14 +15,18 @@ $collection = getCollection();
 <div class="album py-5 bg-light">
     <div class="container">
         <ul class="nav justify-content-end">
-            <li class="nav-item">
-                <?php if (isLoggedIn()): ?>
-                    <a class="nav-link active" href="/logout">Log out</a>
-                <?php else: ?>
-                    <a class="nav-link active" href="/login">Login</a>
-                <?php endif; ?>
-            </li>
-
+            <?php if (isLoggedIn()): ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Log out</a>
+                </li>
+            <?php else: ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Registration</a>
+                </li>
+            <?php endif; ?>
         </ul>
         <h1 class="h1 text-center"><?php echo PAGE_TITLE ?></h1>
         <?php if (isLoggedIn()) : ?>
