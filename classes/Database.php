@@ -4,27 +4,39 @@ final class Database
 {
 
     protected static $pdo = null;
-    
-    // Only for educational purpose!!! Config file MUST not be accesseble via browser
+
+    /**
+     * Only for educational purpose!!! Config file MUST not be accessible via browser
+     */
     const DB_HOST = '127.0.0.1';
     const DB_NAME = 'gallery';
     const DB_USER = 'root';
-    const DB_PASS = '123456';
+    const DB_PASS = '';
     const DB_CHARSET = 'utf8mb4';
 
+    /**
+     * private visibility to prevent from initialization 
+     */
     private function __construct()
     {
         
     }
 
+    /**
+     * private visibility to prevent from initialization 
+     */
     private function __clone()
     {
         
     }
 
+    /**
+     * 
+     * @return PDO connection of false
+     */
     public static function connection()
     {
-        if (self::$pdo == 0) {
+        if (null === self::$pdo) {
             $opt = [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -36,6 +48,12 @@ final class Database
         return self::$pdo;
     }
 
+    /**
+     * 
+     * @param type $sql query
+     * @param type array $args
+     * @return PDOstatement
+     */
     public static function run($sql, $args = [])
     {
         $smtm = self::connection()->prepare($sql);
