@@ -49,7 +49,9 @@ class UserAction
             if ($user->checkPassword($username, $password) == true) {
                 if ($user->loginUser($username) == true) {
                     $row = $user->loginUser($username);
-                    $_SESSION['user_id'] = $row['user_id'];
+                    //$_SESSION['user_id'] = $row['user_id']; // @todo delete after testin session
+                    $session = new Session();
+                    $session->sessionLogin($row['user_id']);
                     $_SESSION['username'] = $row['username'];
                     Validate::redirect('index');
                 } else {

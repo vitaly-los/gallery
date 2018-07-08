@@ -52,19 +52,19 @@ class Image
             case IMAGETYPE_PNG:
                 $imageresourceid = imagecreatefrompng($file);
                 $targetlayer = $this->thumbnail($imageresourceid, $imageinfo[0], $imageinfo[1]);
-                imagepng($targetlayer, $this->pathtosave . $filename . $ext);
+                imagepng($targetlayer, $this->pathtosave . $filename . "." . $ext);
                 break;
 
             case IMAGETYPE_GIF:
                 $imageresourceid = imagecreatefromgif($file);
-                $targetLayer = $this->thumbnail($imageresourceid, $imageinfo[0], $imageinfo[1]);
-                imagegif($targetlayer, $this->pathtosave . $filename . $ext);
+                $targetlayer = $this->thumbnail($imageresourceid, $imageinfo[0], $imageinfo[1]);
+                imagegif($targetlayer, $this->pathtosave . $filename . "." . $ext);
                 break;
 
             case IMAGETYPE_JPEG:
                 $imageresourceid = imagecreatefromjpeg($file);
                 $targetlayer = $this->thumbnail($imageresourceid, $imageinfo[0], $imageinfo[1]);
-                imagejpeg($targetlayer, $this->pathtosave . $filename . $ext);
+                imagejpeg($targetlayer, $this->pathtosave . $filename . "." . $ext);
 
                 break;
 
@@ -81,7 +81,7 @@ class Image
                     VALUES(NULL, :image_path, :thumbnail_path, :description, :author_name, CURRENT_TIMESTAMP(), :user_id)';
             $args = [
                 ':image_path' => $this->target . $filename . "." . $ext,
-                ':thumbnail_path' => $this->pathtosave . $filename . $ext,
+                ':thumbnail_path' => $this->pathtosave . $filename . "." . $ext,
                 ':description' => $description,
                 ':author_name' => $authorname,
                 ':user_id' => $_SESSION['user_id']

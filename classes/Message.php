@@ -25,7 +25,7 @@ abstract class Message
      * @param type output formatted success message
      * @return string and unset session success message
      */
-    public static function outputSussessMessage($message)
+    public static function outputSuccessMessage($message)
     {
         $output = '<div class="alert alert-success">';
         $output .= '<strong>' . $message . '</strong>';

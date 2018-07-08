@@ -99,7 +99,7 @@ final class Validate
     /**
      *  Receive data from input post and return true if all correct, or cast error's message
      * @param type $author
-     * @param type $author
+     * @param type $desc
      * @return boolean
      */
     public static function validateImageUpload($author, $desc)
