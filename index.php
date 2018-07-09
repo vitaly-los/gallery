@@ -6,7 +6,6 @@ error_reporting(E_ALL);
 ?>
 <?php
 
-//session_start(); // @todo delete after testin session
 require './classes/MainPage.php';
 
 $main = new MainPage();

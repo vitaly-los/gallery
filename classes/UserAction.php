@@ -49,7 +49,6 @@ class UserAction
             if ($user->checkPassword($username, $password) == true) {
                 if ($user->loginUser($username) == true) {
                     $row = $user->loginUser($username);
-                    //$_SESSION['user_id'] = $row['user_id']; // @todo delete after testin session
                     $session = new Session();
                     $session->sessionLogin($row['user_id']);
                     $_SESSION['username'] = $row['username'];
@@ -107,11 +106,14 @@ class UserAction
             $id = (int) $_GET['id'];
             $result = Database::run("SELECT image_path, thumbnail_path FROM images WHERE image_id = :image_id", [':image_id' => $id]);
             $row = $result->fetch();
-            @unlink($row['image_path']);
-            @unlink($row['thumbnail_path']);
-            Database::run("DELETE FROM images WHERE image_id = :image_id", [':image_id' => $id]);
-            $_SESSION['success'] = 'You have deleted image';
-            Validate::redirect('index');
+            echo Message::outputDeleteMessage($row['thumbnail_path'], $id);
+            if (isset($_POST['delete'])) {
+                @unlink($row['image_path']);
+                @unlink($row['thumbnail_path']);
+                Database::run("DELETE FROM images WHERE image_id = :image_id", [':image_id' => $_POST['id']]);
+                $_SESSION['success'] = 'You have deleted image';
+                Validate::redirect('index');
+            }
         } else {
             Validate::redirect('index');
         }

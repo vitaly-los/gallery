@@ -34,4 +34,21 @@ abstract class Message
         return $output;
     }
 
+    /**
+     * Render HTML form for deleting image
+     * @param type $thumbnail
+     * @param type $id
+     * @return string
+     */
+    public static function outputDeleteMessage($thumbnail, $id)
+    {
+        $output = '<form action="delete?id=' . $id . '" method="POST">';
+        $output .= '<img src="' . $thumbnail . '"><br />';
+        $output .= '<input type="hidden" name="id" value="' . $id . '" />';
+        $output .= '<a href="/" title="Return to main page"><strong>Back To Gallery<strong></a> &nbsp; &nbsp;';
+        $output .= '<input type="submit" value="Delete Image" name="delete" title="Are you really want to delete the image?">';
+        $output .= '</form>';
+        return $output;
+    }
+
 }
