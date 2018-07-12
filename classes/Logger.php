@@ -5,10 +5,12 @@ class Logger
 
     const PHP_ERROR = 'logs/php_errors.log';
     const ACTION_LOG = 'logs/action.log';
+    const FATAL_ERROR_LOG = '/media/share/html/logs/fatal_errors.log';
 
     public function __construct()
     {
         set_error_handler(array($this, 'logPHPError'), -1);
+        register_shutdown_function(array($this, 'handleFatalPhpError'));
     }
 
     /**
@@ -34,6 +36,16 @@ class Logger
     {
         $content = "$errno  $errstr  $errfile $errline";
         file_put_contents(self::PHP_ERROR, "$content\n", FILE_APPEND);
+    }
+
+    /**
+     * 
+     */
+    public function handleFatalPhpError()
+    {
+        if ($lastError = error_get_last()) {
+            file_put_contents(self::FATAL_ERROR_LOG, implode(', ', $lastError) . "\n", FILE_APPEND);
+        }
     }
 
 }
