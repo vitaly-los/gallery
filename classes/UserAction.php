@@ -25,6 +25,7 @@ class UserAction
                 if ($user->createUser($username, $password) == true) {
                     $_SESSION['username'] = $username;
                     $_SESSION['success'] = 'You successfully register on our site! Now you can login';
+                    Logger::logAction('New user register on site', $_SESSION['username']);
                     Validate::redirect('login');
                 }
             }
@@ -78,6 +79,7 @@ class UserAction
 
                 if ($image->saveImage($authorname, $description) == true) {
                     $_SESSION['success'] = 'You successfully upload image!';
+                    Logger::logAction('Image was uploaded', $_SESSION['username']);
                     Validate::redirect('index');
                 }
             } else {
