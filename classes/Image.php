@@ -1,13 +1,13 @@
 <?php
 
-class Image
+class Image extends Pagination
 {
 
     /**
      * @var arguments for thumbnail generator
      */
-    private $width = 500;
-    private $height = 500;
+    private $width = 400;
+    private $height = 400;
 
     /**
      * @var path for image upload
@@ -113,7 +113,7 @@ class Image
     public function mainGallery()
     {
         $sql = 'SELECT images.image_id, image_path, thumbnail_path, author_name, description, created_at, images.user_id, username FROM images
-            LEFT JOIN users on images.user_id = users.user_id';
+            LEFT JOIN users on images.user_id = users.user_id LIMIT ' . $this->perpage . ' OFFSET ' . $this->offset();
         $result = Database::run($sql);
         return $result;
     }

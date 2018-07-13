@@ -53,7 +53,7 @@ class UserAction
                     $session = new Session();
                     $session->sessionLogin($row['user_id']);
                     $_SESSION['username'] = $row['username'];
-                    Validate::redirect('index');
+                    Validate::redirect('index.php');
                 } else {
                     $_SESSION['error'][] = 'Something went wrong. Please try again';
                     Validate::redirect('login');
@@ -80,7 +80,7 @@ class UserAction
                 if ($image->saveImage($authorname, $description) == true) {
                     $_SESSION['success'] = 'You successfully upload image!';
                     Logger::logAction('Image was uploaded', $_SESSION['username']);
-                    Validate::redirect('index');
+                    Validate::redirect('index.php');
                 }
             } else {
                 Validate::redirect('form');
@@ -95,7 +95,7 @@ class UserAction
     {
         unset($_SESSION);
         session_destroy();
-        Validate::redirect('index');
+        Validate::redirect('index.php');
     }
 
     /**
@@ -114,10 +114,10 @@ class UserAction
                 @unlink($row['thumbnail_path']);
                 Database::run("DELETE FROM images WHERE image_id = :image_id", [':image_id' => $_POST['id']]);
                 $_SESSION['success'] = 'You have deleted image';
-                Validate::redirect('index');
+                Validate::redirect('index.php');
             }
         } else {
-            Validate::redirect('index');
+            Validate::redirect('index.php');
         }
     }
 

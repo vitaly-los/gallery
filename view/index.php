@@ -71,9 +71,12 @@
                     <?php endif; ?>
                 </div>
                 <div class="d-flex p-2">
-                    <nav>
+                    <nav><hr />
                         <ul class="pagination justify-content-center">
-                            <?php //@todo pagination     ?>
+                            <?php
+                            $pagination = new Pagination(6, Pagination::countImages());
+                            echo $pagination->outputPagination();
+                            ?>
                         </ul>
                     </nav>
                 </div>
